@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	html,
+	body {
+		@apply bg-zinc-200 text-gray-600 dark:bg-zinc-800 dark:text-gray-200;
+	}
+	.badges-container {
+		@apply flex flex-wrap items-center;
+	}
+	.badge {
+		@apply inline-block mr-2;
+	}
+}
