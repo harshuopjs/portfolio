@@ -1,0 +1,1 @@
+import{_ as o}from"./Cobd83YR.js";import{e as n,j as r,o as a,w as s,M as _,d as l,t as p}from"./CJ2vBQ3b.js";const u=n({__name:"external-link",props:{href:{}},setup(f){return(e,i)=>{const t=o;return a(),r(t,{to:e.href,target:"_blank",class:"underline-offset-2 hover:underline"},{default:s(()=>[_(e.$slots,"default",{},()=>[l(p(e.href),1)])]),_:3},8,["to"])}}});export{u as _};

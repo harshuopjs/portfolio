@@ -1,0 +1,2 @@
+const e="button>.send[data-v-88754566]{fill:#52525b80}@media (prefers-color-scheme:dark){button>.send[data-v-88754566]{fill:#d4d4d880}}button:enabled>.send[data-v-88754566]{fill:#52525b}button:enabled>.send[data-v-88754566]:hover{fill:#27272a}@media (prefers-color-scheme:dark){button:enabled>.send[data-v-88754566]{fill:#d4d4d8}button:enabled>.send[data-v-88754566]:hover{fill:#fafafa}}";export{e as c};
+//# sourceMappingURL=card-message-styles-1.mjs-B8mmyjRP.mjs.map
