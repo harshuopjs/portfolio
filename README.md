@@ -1,36 +1,62 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Harsh Kumar Singh: Portfolio
 
-## Getting Started
+Next.js 16 (App Router) · TypeScript · Tailwind CSS v4 · Motion · Lucide.
+All content is derived from the resume and lives in `data/`.
 
-First, run the development server:
+## Run
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+cp .env.example .env.local   # then fill in values (see below)
+npm run dev                  # http://localhost:3000
+npm run lint && npx tsc --noEmit
+npm run build && npm start   # production build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Node.js 20.9+ is required (24 LTS used in development).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Path | Purpose |
+| --- | --- |
+| `data/` | Resume-derived content: `site.ts`, `projects.ts`, `skills.ts`, `experience.ts` |
+| `components/sections/` | Hero, About, Skills, Projects, Experience, Education, GitHub, Contact |
+| `components/projects/` | Case-study modal, interactive architecture diagrams, workflow, CPU scheduler demo |
+| `lib/` | GitHub API fetch (server-side, cached 1h), scheduling algorithms |
+| `app/api/contact/route.ts` | Contact form backend |
+| `public/Harsh_Kumar_Singh_Resume.pdf` | Downloadable resume |
 
-## Learn More
+## Configuration
 
-To learn more about Next.js, take a look at the following resources:
+Copy `.env.example` to `.env.local`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Contact form** (Gmail SMTP, no extra service): in your Google account turn on 2-Step Verification, create an
+  App Password at https://myaccount.google.com/apppasswords, and put it in `.env.local` as `SMTP_PASS`
+  (`SMTP_USER` and `CONTACT_TO_EMAIL` are pre-filled). Restart the server. Messages arrive in your inbox with
+  Reply-To set to the visitor. The visitor also gets an automatic confirmation from a no-reply sender (`AUTOREPLY_FROM`,
+  see `.env.example`). Resend is supported as an alternative (`RESEND_API_KEY`).
+  Until configured, the API responds 503 and the form shows an error with an "Email me instead" link. It never fakes success.
+  Protections: server-side validation, honeypot, minimum fill time, per-IP rate limit (in-memory), HTML escaping.
+  On Vercel, add the same variables in Project Settings → Environment Variables.
+- **`NEXT_PUBLIC_SITE_URL`**: set to your final domain to enable canonical URL, sitemap entries and correct Open Graph URLs.
+- **`GITHUB_TOKEN`** (optional, server-only): raises the GitHub API rate limit. Without it, the section still works and falls back to a static project list if the API fails.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Things to verify or complete
 
-## Deploy on Vercel
+- **LinkedIn**: the resume gives the handle `engi-harsh`; the URL `https://www.linkedin.com/in/engi-harsh` is built from it and was not opened/verified. Edit `data/site.ts` if it differs.
+- **Project links**: no repository or demo URLs were in the resume, so none are shown. Add `repo` / `demo` to an entry in `data/projects.ts` and buttons appear automatically.
+- **Screenshots**: none were supplied, so case studies use architecture diagrams instead. Put images in `public/` and extend `Project` if you want them.
+- **yantraworks.cloud**: linked nowhere and no DNS/hosting is touched. `legacyPortfolio` in `data/site.ts` is available if you want to surface it.
+- Phone number from the resume is intentionally not published.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Deploy (Vercel)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Push this folder to a GitHub repository and import it in Vercel (framework auto-detected).
+2. Add the environment variables above in Project Settings → Environment Variables.
+3. Deploy. Optionally attach a custom domain, then set `NEXT_PUBLIC_SITE_URL` and redeploy.
+
+Any Node host works too: `npm run build && npm start`. Security headers (CSP, HSTS, X-Frame-Options, etc.) are set in `next.config.ts`.
+
+## Accuracy notes
+
+Diagrams are conceptual and based only on the resume's descriptions, not source-code internals. The CPU scheduling demo is a small re-implementation for this site, not the original AlgoVerse app. HexaWave is presented as local-Wi-Fi only.
