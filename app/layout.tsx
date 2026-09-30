@@ -10,7 +10,7 @@ const mono = JetBrains_Mono({ variable: "--font-jetbrains", subsets: ["latin"], 
 const title = `${site.name} | Backend Engineer & Full Stack Developer`;
 
 export const metadata: Metadata = {
-  ...(site.url ? { metadataBase: new URL(site.url), alternates: { canonical: "/" } } : {}),
+  ...(site.url ? { metadataBase: new URL(site.url), alternates: { canonical: site.url } } : {}),
   title: { default: title, template: `%s | ${site.name}` },
   description: site.description,
   authors: [{ name: site.name, url: site.github }],

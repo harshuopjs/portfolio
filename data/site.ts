@@ -1,3 +1,7 @@
+export const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+export const staticMode = process.env.NEXT_PUBLIC_STATIC === "1";
+export const asset = (path: string) => `${basePath}${path}`;
+
 export const site = {
   name: "Harsh Kumar Singh",
   initials: "HK",
@@ -14,7 +18,7 @@ export const site = {
   linkedin: "https://www.linkedin.com/in/engi-harsh",
   linkedinHandle: "engi-harsh",
   legacyPortfolio: "https://yantraworks.cloud",
-  resume: "/Harsh_Kumar_Singh_Resume.pdf",
+  resume: asset("/Harsh_Kumar_Singh_Resume.pdf"),
   resumeFile: "Harsh_Kumar_Singh_Resume.pdf",
 
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "",

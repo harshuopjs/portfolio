@@ -1,6 +1,6 @@
 import { ArrowUp, Download, Mail, MapPin } from "lucide-react";
 import Image from "next/image";
-import { nav, site } from "@/data/site";
+import { asset, nav, site } from "@/data/site";
 import { GithubIcon, LinkedinIcon } from "./ui/icons";
 
 const link = "ulink inline-block py-1 text-muted hover:text-fg";
@@ -12,7 +12,7 @@ export function Footer() {
         <div className="grid gap-12 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
           <div>
             <a href="#top" className="inline-flex items-center gap-3" aria-label={`${site.name}, back to top`}>
-              <Image src="/avatar.webp" alt="" width={44} height={44} unoptimized className="h-11 w-11 rounded-full border border-line object-cover" />
+              <Image src={asset("/avatar.webp")} alt="" width={44} height={44} unoptimized className="h-11 w-11 rounded-full border border-line object-cover" />
               <span className="display text-3xl">{site.name}</span>
             </a>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted">

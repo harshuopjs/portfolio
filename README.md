@@ -60,3 +60,19 @@ Any Node host works too: `npm run build && npm start`. Security headers (CSP, HS
 ## Accuracy notes
 
 Diagrams are conceptual and based only on the resume's descriptions, not source-code internals. The CPU scheduling demo is a small re-implementation for this site, not the original AlgoVerse app. HexaWave is presented as local-Wi-Fi only.
+
+## Deploy on GitHub Pages (temporary)
+
+GitHub Pages serves static files only, so the workflow in `.github/workflows/pages.yml` builds a static export
+with `NEXT_PUBLIC_STATIC=1`, removes `app/api`, and publishes to `https://harshuopjs.github.io/portfolio/`.
+
+1. Repository Settings, Pages, Build and deployment, Source: **GitHub Actions**.
+2. Push to `main` (or run the workflow manually). It also rebuilds daily so the GitHub repository list stays fresh.
+
+Differences from a full deployment:
+
+- **Contact form:** there is no server, so the form opens the visitor's email app with the message prefilled instead of sending it. Move to Vercel (see above) for the real form with auto-reply.
+- **Security headers:** Pages cannot set custom headers, so the CSP and related headers in `next.config.ts` only apply on a server host.
+- **Repository list:** fetched at build time, not on every visit.
+
+To test locally: `NEXT_PUBLIC_STATIC=1 NEXT_PUBLIC_BASE_PATH=/portfolio npm run build` after temporarily moving `app/api` out of the project.

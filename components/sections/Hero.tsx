@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { ArrowDown, Download, Mail } from "lucide-react";
-import { site } from "@/data/site";
+import { asset, site } from "@/data/site";
 import { skillGroups } from "@/data/skills";
 import { HeroScroll } from "../HeroScroll";
 import { GithubIcon, LinkedinIcon } from "../ui/icons";
@@ -58,7 +58,7 @@ export function Hero() {
       <div className="container-page grid items-center gap-10 pt-32 sm:pt-40 lg:grid-cols-[1.4fr_1fr]">
         <div>
           <Image
-            src="/avatar.webp"
+            src={asset("/avatar.webp")}
             alt="Portrait of Harsh Kumar Singh"
             width={96}
             height={96}
@@ -116,7 +116,7 @@ export function Hero() {
           <Network />
           <div className="absolute left-[23%] top-[7%] w-[54%] overflow-hidden rounded-t-[999px] rounded-b-2xl border border-line bg-surface shadow-2xl shadow-black/40">
             <Image
-              src="/harsh.webp"
+              src={asset("/harsh.webp")}
               alt="Portrait of Harsh Kumar Singh"
               width={880}
               height={1100}

@@ -2,7 +2,7 @@
 import { Command, Menu, X } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { nav, site } from "@/data/site";
+import { asset, nav, site } from "@/data/site";
 import { ThemeToggle } from "./ThemeToggle";
 
 export function Navbar({ onPalette }: { onPalette: () => void }) {
@@ -47,7 +47,7 @@ export function Navbar({ onPalette }: { onPalette: () => void }) {
       />
       <div className="container-page flex h-16 items-center justify-between">
         <a href="#top" className="flex items-center gap-2 font-mono text-sm font-semibold" aria-label={`${site.name}, back to top`}>
-          <Image src="/avatar.webp" alt="" width={32} height={32} unoptimized className="h-8 w-8 rounded-full border border-line object-cover" />
+          <Image src={asset("/avatar.webp")} alt="" width={32} height={32} unoptimized className="h-8 w-8 rounded-full border border-line object-cover" />
           <span className="hidden sm:inline">harsh.dev</span>
         </a>
 

@@ -2,7 +2,7 @@
 import { Check, CheckCircle2, Copy, Loader2, Mail, MapPin, Send } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { contactCategories } from "@/data/contact";
-import { site } from "@/data/site";
+import { asset, site, staticMode } from "@/data/site";
 import { GithubIcon, LinkedinIcon } from "../ui/icons";
 import { Section } from "../ui/Section";
 
@@ -71,10 +71,21 @@ export function Contact() {
       requestAnimationFrame(() => formRef.current?.querySelector<HTMLElement>("[aria-invalid='true']")?.focus());
       return;
     }
+    if (staticMode) {
+      const label = contactCategories.find((c) => c.id === values.category)?.label ?? "General";
+      const body = `Category: ${label}
+From: ${values.name.trim()} <${values.email.trim()}>
+
+${values.message.trim()}`;
+      window.location.href = `mailto:${site.email}?subject=${encodeURIComponent(`[Portfolio | ${label}] ${values.subject.trim()}`)}&body=${encodeURIComponent(body)}`;
+      setStatus("error");
+      setNotice({ text: "Your email app should open with the message filled in. It is only sent when you press send there. If nothing opens, email me directly." });
+      return;
+    }
     setStatus("sending");
     setNotice({ text: "" });
     try {
-      const res = await fetch("/api/contact", {
+      const res = await fetch(asset("/api/contact"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -259,7 +270,7 @@ export function Contact() {
               </button>
               <div role="status" aria-live="polite" className="text-sm">
                 {status === "error" && notice.text && (
-                  <p className="text-danger">
+                  <p className={staticMode && !Object.keys(errors).length ? "text-muted" : "text-danger"}>
                     {notice.text}{" "}
                     {notice.fallback && (
                       <a className="underline" href={`mailto:${site.email}`}>
