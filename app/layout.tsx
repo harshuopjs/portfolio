@@ -1,12 +1,13 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Instrument_Serif, JetBrains_Mono } from "next/font/google";
-import { site } from "@/data/site";
+import { asset, site } from "@/data/site";
 import "./globals.css";
 
 const inter = Inter({ variable: "--font-inter", subsets: ["latin"], display: "swap" });
 const serif = Instrument_Serif({ variable: "--font-instrument", subsets: ["latin"], weight: "400", style: ["normal", "italic"], display: "swap" });
 const mono = JetBrains_Mono({ variable: "--font-jetbrains", subsets: ["latin"], display: "swap" });
 
+const ogImage = { url: asset("/og.jpg"), width: 1200, height: 630, alt: `${site.name}, Backend Engineer and Full Stack Developer` };
 const title = `${site.name} | Backend Engineer & Full Stack Developer`;
 
 export const metadata: Metadata = {
@@ -17,12 +18,14 @@ export const metadata: Metadata = {
   keywords: ["Harsh Kumar Singh", "Backend Engineer", "Full Stack Developer", "Python", "FastAPI", "PostgreSQL", "WebRTC", "Delhi"],
   openGraph: {
     type: "website",
+    url: site.url,
     title,
     description: site.description,
     siteName: site.name,
     locale: "en_IN",
+    images: [ogImage],
   },
-  twitter: { card: "summary_large_image", title, description: site.description },
+  twitter: { card: "summary_large_image", title, description: site.description, images: [ogImage.url] },
 };
 
 export const viewport: Viewport = {

@@ -21,9 +21,9 @@ export const site = {
   resume: asset("/Harsh_Kumar_Singh_Resume.pdf"),
   resumeFile: "Harsh_Kumar_Singh_Resume.pdf",
 
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "",
+  url: (process.env.NEXT_PUBLIC_SITE_URL || "https://www.yantraworks.cloud").replace(/\/+$/, ""),
   description:
-    "Harsh Kumar Singh is a backend engineer and full stack developer in Delhi, building real-time systems, secure authentication and encrypted peer-to-peer software with Python, FastAPI, PostgreSQL, Kotlin and Rust.",
+    "Backend engineer and full stack developer from Delhi. I build real-time systems, secure authentication and encrypted peer-to-peer apps.",
 };
 
 export const nav = [
